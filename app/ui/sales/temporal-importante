@@ -1,0 +1,201 @@
+<div className="rounded-md bg-gray-50 p-4 md:p-6">
+        {/* Customer Name */}
+        <div className="mb-4">
+          <label htmlFor="customer" className="mb-2 block text-sm font-medium">
+            Choose customer
+          </label>
+          <div className="relative">
+            <select
+              {...register('customer', { required: true })}
+              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              aria-describedby="customer-error"
+            >
+              <option value="" disabled>
+                Client
+              </option>
+              {customers.map((customer) => (
+                <option key={customer.customer_id} value={customer.customer_id}>
+                  {customer.customer_name}
+                </option>
+              ))}
+            </select>
+            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+          </div>
+          {/* <div id="customer-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.customerId &&
+              state.errors.customerId.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div> */}
+        </div>
+        {/* Branch Name */}
+        <div className="mb-4">
+          <label htmlFor="office" className="mb-2 block text-sm font-medium">
+            Branch office
+          </label>
+          <div className="relative">
+            <select
+              {...register('office', { required: true })}
+              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              aria-describedby="office-error"
+              onChange={handleOfficeChange}
+            >
+              <option value="" disabled>
+                office
+              </option>
+              {branchOffice.map((office) => (
+                <option
+                  key={office.branch_office_id}
+                  value={office.branch_office_id}
+                >
+                  {office.branch_office_name}
+                </option>
+              ))}
+            </select>
+            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+          </div>
+          {/* <div id="office-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.customerId &&
+              state.errors.customerId.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div> */}
+        </div>
+
+        {/* Currency */}
+        <div className="mb-4">
+          <label htmlFor="currency" className="mb-2 block text-sm font-medium">
+            Currency
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                {...register('currency', { required: true })}
+                type="text"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                disabled
+              />
+              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="seller" className="mb-2 block text-sm font-medium">
+            seller
+          </label>
+          <div className="relative">
+            <select
+              {...register('seller', { required: true })}
+              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              aria-describedby="seller-error"
+            >
+              <option value="" disabled>
+                sellers
+              </option>
+              {sellers.map((seller) => (
+                <option key={seller.seller_id} value={seller.seller_id}>
+                  {seller.seller_name}
+                </option>
+              ))}
+            </select>
+            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+          </div>
+          {/* <div id="customer-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.customerId &&
+              state.errors.customerId.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div> */}
+        </div>
+
+        <h1>Details</h1>
+
+        {fields.map((field, index) => (
+          <div key={index}>
+            <div>
+              <div className="relative">
+                <select
+                  {...register(`products.${index}.productId`, {
+                    required: true,
+                  })}
+                  className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  aria-describedby="customer-error"
+                  onChange={({ ...field }) => handleChangeProduct(field, index)}
+                >
+                  <option value="" disabled>
+                    Name
+                  </option>
+                  {products.map((product) => (
+                    <option key={product.product_id} value={product.product_id}>
+                      {product.product_name}
+                    </option>
+                  ))}
+                </select>
+                <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+              </div>
+            </div>
+            <div>
+              <label htmlFor={`products.${index}.quantity`}>Quantity</label>
+              <input
+                key={field.id}
+                {...register(`products.${index}.quantity`)}
+                onChange={({ ...field }) => handleChangeQuantity(index, field)}
+              />
+            </div>
+            <div>
+              <label htmlFor={`products.${index}.price`}>Price</label>
+              <input
+                key={field.id}
+                {...register(`products.${index}.price`)}
+                onChange={({ ...field }) => handleChangePrice(index, field)}
+                readOnly
+              />
+            </div>
+            <div>
+              <label htmlFor={`products.${index}.subTotal`}>Sub total</label>
+              <input
+                key={field.id}
+                {...register(`products.${index}.subTotal`)}
+              />
+            </div>
+
+            <button
+              onClick={() => handleRemoveInput(index)}
+              className="rounded bg-red-500 p-2 text-white"
+            >
+              Eliminar
+            </button>
+          </div>
+        ))}
+        <button
+          onClick={handleAddInput}
+          className="rounded bg-green-500 p-2 text-white"
+        >
+          Agregar Input
+        </button>
+        <label htmlFor="total">Price:</label>
+        <input type="text" {...register('total', { required: true })} />
+        {/* <div id="message-error" aria-live="polite" aria-atomic="true">
+          {state.message && (
+            <p className="mt-2 text-sm text-red-500" key={state.message}>
+              {state.message}
+            </p>
+          )}
+        </div> */}
+      </div>
+      <div className="mt-6 flex justify-end gap-4">
+        <Link
+          href="/dashboard/invoices"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+        >
+          Cancel
+        </Link>
+        <Button type="submit">Create Invoice</Button>
+      </div>

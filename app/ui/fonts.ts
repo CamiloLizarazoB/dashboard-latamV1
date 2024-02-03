@@ -7,7 +7,7 @@ export const lusitana = Lusitana({
   subsets: ['latin'],
 });
 
-export const customFont = localFont({
+export const openSansBold = localFont({
   src: '../../public/fonts/OpenSans-Bold.ttf',
   display: 'swap',
 });

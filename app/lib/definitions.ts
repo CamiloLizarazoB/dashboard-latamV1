@@ -1,7 +1,3 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
   id: string;
   name: string;
@@ -9,80 +5,57 @@ export type User = {
   password: string;
 };
 
+export type Supplier = {
+  supplier_id: string;
+  supplier_rut: string;
+  supplier_name: string;
+  supplier_phone: string;
+  supplier_website?: string;
+  supplier_address: string;
+};
+
+export type Seller = {
+  seller_id: string;
+  seller_rut: string;
+  seller_name: string;
+  seller_lastname: string;
+  seller_phone: string;
+  seller_birthdate: Date;
+  seller_email: string;
+  seller_address: string;
+};
+
 export type Customer = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-};
-
-export type Invoice = {
-  id: string;
   customer_id: string;
-  amount: number;
-  date: string;
-  // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-  status: 'pending' | 'paid';
+  customer_rut: string;
+  customer_name: string;
+  customer_lastname: string;
+  customer_phone: string;
+  ustomer_address: string;
 };
 
-export type Revenue = {
-  month: string;
-  revenue: number;
+export type Product = {
+  product_id: string;
+  product_name: string;
+  product_price: number;
+  product_stock: number;
+  branch_office_id: string
 };
 
-export type LatestInvoice = {
-  id: string;
-  name: string;
-  image_url: string;
-  email: string;
-  amount: string;
+export type BranchOffice = {
+  branch_office_id: string;
+  branch_office_name: string;
+  branch_office_country: string;
+  branch_office_currency: string;
 };
 
-// The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
-  amount: number;
-};
-
-export type InvoicesTable = {
-  id: string;
+export type Sale = {
+  sale_id: string;
+  sale_date: Date;
+  seller_id: string;
   customer_id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  date: string;
-  amount: number;
-  status: 'pending' | 'paid';
+  branch_office_id: string;
+  total_sale_amount: number;
+  sale_details: string;
 };
 
-export type CustomersTableType = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: number;
-  total_paid: number;
-};
-
-export type FormattedCustomersTable = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: string;
-  total_paid: string;
-};
-
-export type CustomerField = {
-  id: string;
-  name: string;
-};
-
-export type InvoiceForm = {
-  id: string;
-  customer_id: string;
-  amount: number;
-  status: 'pending' | 'paid';
-};
