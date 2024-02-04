@@ -19,12 +19,14 @@ import styled from '@emotion/styled';
 //   transition: width 0.3s ease;
 // `;
 
-const SidebarContainer = styled('div')(({ expanded }: { expanded: boolean }) => ({
-  width: expanded ? '200px' : '80px',
-  height: '100vh',
-  color: '#fff',
-  transition: 'width 0.3s ease',
-}));
+const SidebarContainer = styled('div')(
+  ({ expanded }: { expanded: boolean }) => ({
+    width: expanded ? '200px' : '80px',
+    height: '100vh',
+    color: '#fff',
+    transition: 'width 0.3s ease',
+  }),
+);
 
 const Sidebar = ({
   expanded,
@@ -38,7 +40,8 @@ const Sidebar = ({
       expanded={expanded}
       className="flex h-screen w-16 flex-col items-center bg-blue-700 py-4"
     >
-      <div className="mb-4">
+      <NavLinks />
+      {/* <div className="mb-4">
         <i className="fas fa-briefcase fa-2x text-white"></i>
       </div>
       <div className="mb-4">
@@ -46,7 +49,7 @@ const Sidebar = ({
       </div>
       <div>
         <i className="fas fa-cog fa-2x text-white"></i>
-      </div>
+      </div> */}
       <div className="hidden h-auto w-full grow rounded-md bg-blue-700 md:block"></div>
       <div>
         <div>

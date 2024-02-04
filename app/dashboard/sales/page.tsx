@@ -1,14 +1,14 @@
 import Pagination from '@/app/ui/sales/pagination';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/sales/table';
-import { CreateInvoice } from '@/app/ui/sales/buttons';
+import { CreateSale } from '@/app/ui/sales/buttons';
 import { lusitana } from '@/app/ui/fonts';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { SalesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Invoices',
+  title: 'Sales',
 };
 
 export default async function Page({
@@ -27,14 +27,13 @@ export default async function Page({
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
+        <h2 className="mb-2 text-4xl font-bold text-blue-800">Sales</h2>{' '}
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search invoices..." />
-        <CreateInvoice />
+        <CreateSale />
       </div>
-       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
+      <Suspense key={query + currentPage} fallback={<SalesTableSkeleton />}>
+        <Table />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
         {/* <Pagination totalPages={totalPages} /> */}

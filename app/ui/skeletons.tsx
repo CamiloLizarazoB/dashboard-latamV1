@@ -163,7 +163,7 @@ export function InvoicesMobileSkeleton() {
   );
 }
 
-export function InvoicesTableSkeleton() {
+export function SalesTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -180,25 +180,25 @@ export function InvoicesTableSkeleton() {
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
+                  Sale id
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
+                  Sale birtday
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
+                  Seller id
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Date
+                  Customer id
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Status
+                  Branch office id
                 </th>
-                <th
-                  scope="col"
-                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
-                >
-                  <span className="sr-only">Edit</span>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total
+                </th>
+                <th scope="col" className="relative py-3 pl-6 pr-3">
+                  Details
                 </th>
               </tr>
             </thead>

@@ -160,7 +160,9 @@ export default function Form({
                 ))}
               </select>{' '}
               <button className="bg-blue-500 px-4 py-2 text-white">
-                <i className="fas fa-plus"></i>
+                <Link href="/dashboard/customers/create">
+                  <i className="fas fa-plus"></i>
+                </Link>
               </button>
               <select
                 {...register('office', { required: true })}

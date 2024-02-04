@@ -1,4 +1,3 @@
-
 import { openSansBold } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import {
@@ -6,33 +5,31 @@ import {
   LatestInvoicesSkeleton,
   RevenueChartSkeleton,
 } from '@/app/ui/skeletons';
+import Form from '@/app/ui/sales/create-form';
+import { fetchBranchOffice, fetchCustomers, fetchSellers } from '@/app/lib/data';
 
 export default async function Page() {
-  // const {
-  //   numberOfInvoices,
-  //   numberOfCustomers,
-  //   totalPaidInvoices,
-  //   totalPendingInvoices,
-  // } = await fetchCardData();
+  const customers = await fetchCustomers();
+  const branchOffice = await fetchBranchOffice();
+  const sellers = await fetchSellers();
 
   return (
     <main>
-      <h1 className={`${openSansBold.className} mb-4 text-xl md:text-2xl`}>
-        New Sale
-      </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* <Suspense fallback={<CardsSkeleton />}>
-          <CardWrapper />
-        </Suspense> */}
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        {/* <Suspense fallback={<RevenueChartSkeleton />}>
-          <RevenueChart />
-        </Suspense>
-        <Suspense fallback={<LatestInvoicesSkeleton />}>
-          <LatestInvoices />
-        </Suspense> */}
-      </div>
+      {/* <Breadcrumbs
+        breadcrumbs={[
+          { label: 'Sales', href: '/dashboard/sales' },
+          {
+            label: 'Create Invoice',
+            href: '/dashboard/sales/create',
+            active: true,
+          },
+        ]}
+      /> */}
+      <Form
+        customers={customers}
+        branchOffice={branchOffice}
+        sellers={sellers}
+      />
     </main>
   );
 }
