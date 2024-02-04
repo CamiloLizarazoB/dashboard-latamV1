@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { SaleById } from '@/app/lib/actions';
 import { Sale } from '@/app/lib/definitions';
 import { SaleDetailsReturn } from '@/app/ui/sales/buttons';
+import { openSansExtraBold } from '@/app/ui/fonts';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -17,10 +18,15 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
   return (
     <main>
-      <div className="container mx-auto p-4">
-        <h1 className="mb-4 text-2xl font-bold">Detalle de Venta</h1>
+      <div className="flex-1 p-8">
+        <h2
+          className={`${openSansExtraBold.className} mb-2 text-4xl font-bold text-black`}
+        >
+          Sale detail
+        </h2>
+        <hr className="horizontal-line" />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 mt-20">
           <div className="rounded-lg bg-white p-4 shadow-md">
             <h3 className="mb-2 text-lg font-bold">ID Venta</h3>
             <p className="text-gray-700">{saleData.sale_id}</p>

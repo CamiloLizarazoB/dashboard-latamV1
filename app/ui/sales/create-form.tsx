@@ -11,7 +11,7 @@ import { Button } from '@/app/ui/button';
 import { createSale, fetchProducts } from '@/app/lib/actions';
 import { ChangeEvent, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { openSansSemiBold } from '../fonts';
+import { openSansBold, openSansExtraBold, openSansSemiBold } from '../fonts';
 
 export default function Form({
   customers,
@@ -81,7 +81,8 @@ export default function Form({
     );
     setValue(
       'currency',
-      selectedBranchOffice ? selectedBranchOffice.branch_office_currency : '', { shouldValidate: true}
+      selectedBranchOffice ? selectedBranchOffice.branch_office_currency : '',
+      { shouldValidate: true },
     );
     handleSetProducts(selectedOfficeId);
   };
@@ -154,9 +155,17 @@ export default function Form({
     >
       <div className="flex">
         <div className="flex-1 p-8">
-          <h2 className="mb-2 text-4xl font-bold text-blue-800">New Sale</h2>
+          <h2
+            className={`${openSansExtraBold.className} mb-2 text-4xl font-bold text-black`}
+          >
+            New Sale
+          </h2>
+          <hr className="horizontal-line" />
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-600">Document</h3>
+            <h3 className="subtitle mb-2 text-lg font-semibold text-gray-600">
+              Document
+            </h3>
+            <hr />
             <div className="mt-4 flex space-x-4 text-lg">
               <div className="block w-full">
                 <label
@@ -279,7 +288,10 @@ export default function Form({
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-600">Details</h3>
+            <h3 className="subtitle mb-2 text-lg font-semibold text-gray-600">
+              Details
+            </h3>
+            <hr />
             {fields.map((field, index) => (
               <div key={index} className="mt-4 flex space-x-4">
                 <div className="block w-full">
@@ -390,7 +402,7 @@ export default function Form({
           </div>
 
           <div className="mt-8">
-            <div className="flex justify-end">
+            <div className="flex justify-end mb-5">
               <div className="block">
                 <label
                   className="mb-3 mt-5 block font-medium text-gray-900"
@@ -407,6 +419,7 @@ export default function Form({
                 />
               </div>
             </div>
+            <hr />
             <button className="float-right mt-4 bg-blue-500 px-6 py-2 text-white">
               Save
             </button>
