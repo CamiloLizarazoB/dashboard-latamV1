@@ -1,5 +1,3 @@
-import Breadcrumbs from '@/app/ui/sales/breadcrumbs';
-import { fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 import { SaleById } from '@/app/lib/actions';
 import { Sale } from '@/app/lib/definitions';
