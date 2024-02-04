@@ -5,7 +5,7 @@ export const authConfig = {
     signIn: '/login',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    authorized({ auth, request: { nextUrl } }: { auth: any, request: { nextUrl: any}}) {
       const isLoggedIn = !!auth?.user;
       const isOnHome = nextUrl.pathname.startsWith('/');
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');

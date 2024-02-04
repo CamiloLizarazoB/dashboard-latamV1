@@ -65,11 +65,11 @@ export default function Form({
   );
 
   const formData = watch();
-  const formSubmit = (data) => {
+  const formSubmit = (data: any) => {
     createSale(initialState, data);
   };
 
-  const handleOfficeChange = (event) => {
+  const handleOfficeChange = (event: any) => {
     const selectedOfficeId = event.target.value;
     setSelectedOffice(selectedOfficeId);
     const selectedBranchOffice = branchOffice.find(
@@ -100,23 +100,23 @@ export default function Form({
     remove(index);
   };
 
-  const handleChangeQuantity = (index: number, field) => {
+  const handleChangeQuantity = (index: number, field: any) => {
     const products = formData.products;
     const productSubTotal =
       Number(products?.[index].price) * Number(field.target.value);
     setValue(`products.${index}.subTotal`, String(productSubTotal));
-    handleChangeSubtotal(index, field);
+    handleChangeSubtotal();
   };
 
-  const handleChangePrice = (index: number, field) => {
+  const handleChangePrice = (index: number, field: any) => {
     const products = formData.products;
     const productSubTotal =
       Number(field.target.value) * Number(products?.[index].quantity);
     setValue(`products.${index}.subTotal`, String(productSubTotal));
-    handleChangeSubtotal(index, field);
+    handleChangeSubtotal();
   };
 
-  const handleChangeSubtotal = (index: number, field) => {
+  const handleChangeSubtotal = () => {
     const products = formData.products;
     let total = 0;
     products?.map((product) => {

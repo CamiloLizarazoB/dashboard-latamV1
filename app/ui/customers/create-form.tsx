@@ -39,7 +39,7 @@ export default function Form({
     name: 'address',
   });
 
-  const formSubmit = (data) => {
+  const formSubmit = (data: any) => {
     createClient(initialState, data)
   };
 

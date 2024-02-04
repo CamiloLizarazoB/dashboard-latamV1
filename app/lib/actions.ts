@@ -52,7 +52,7 @@ export async function createSale(prevState: State, formData: any) {
   redirect('/dashboard');
 }
 
-export async function createClient(prevState: State, formData) {
+export async function createClient(prevState: State, formData: any) {
   const jsonString = JSON.stringify(formData.address);
   const customer_address = jsonString.substring(1, jsonString.length - 1);
 

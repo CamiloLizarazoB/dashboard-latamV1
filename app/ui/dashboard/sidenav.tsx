@@ -8,18 +8,31 @@ import {
   ArrowRightCircleIcon,
 } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
-import styled from 'styled-components';
 import { useState } from 'react';
 import { signOutAction } from '@/app/lib/actions';
+import styled from '@emotion/styled';
 
-const SidebarContainer = styled.div`
-  width: ${(props) => (props.expanded ? '200px' : '80px')};
-  height: 100vh;
-  color: #fff;
-  transition: width 0.3s ease;
-`;
+// const SidebarContainer = styled.div`
+//   width: ${(props) => (props.expanded ? '200px' : '80px')};
+//   height: 100vh;
+//   color: #fff;
+//   transition: width 0.3s ease;
+// `;
 
-const Sidebar = ({ expanded, toggleSidebar }) => {
+const SidebarContainer = styled('div')(({ expanded }: { expanded: boolean }) => ({
+  width: expanded ? '200px' : '80px',
+  height: '100vh',
+  color: '#fff',
+  transition: 'width 0.3s ease',
+}));
+
+const Sidebar = ({
+  expanded,
+  toggleSidebar,
+}: {
+  expanded: boolean;
+  toggleSidebar: any;
+}) => {
   return (
     <SidebarContainer
       expanded={expanded}
@@ -38,7 +51,10 @@ const Sidebar = ({ expanded, toggleSidebar }) => {
       <div>
         <div>
           {expanded ? (
-            <ArrowLeftCircleIcon onClick={toggleSidebar} className="w-full p-20" />
+            <ArrowLeftCircleIcon
+              onClick={toggleSidebar}
+              className="w-full p-20"
+            />
           ) : (
             <ArrowRightCircleIcon onClick={toggleSidebar} className="w-6" />
           )}

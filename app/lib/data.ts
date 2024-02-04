@@ -1,12 +1,7 @@
 import { sql } from '@/node_modules/@vercel/postgres/dist/index.cjs';
 import {
   Customer,
-  CustomersTableType,
-  InvoiceForm,
-  InvoicesTable,
-  LatestInvoiceRaw,
   User,
-  Revenue,
   BranchOffice,
   Product,
   Seller,
@@ -202,7 +197,7 @@ export async function fetchSellers() {
     const sellers = data.rows;
     return sellers;
   } catch (error) {
-    console.error('Database Error:', err);
+    console.error('Database Error:', error);
     throw new Error('Failed to fetch all sellers.');
   }
 }
