@@ -15,20 +15,23 @@ Instrucciones:
 
 1. Clonar el repositorio:
 
-```
+```bash
 git clone https://github.com/CamiloLizarazoB/dashboard-latamV1.git 
+```
 
 2. Instalar las dependencias:
 
 cd dashboard-latamV1
 
-```
+```bash
 npm install 
+```
 
 3. Iniciar el servidor de desarrollo:
 
-```
+```bash
 npm run dev 
+```
 
 4. Abrir la aplicación en el navegador:
 
