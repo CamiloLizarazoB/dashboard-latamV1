@@ -21,9 +21,9 @@ git clone https://github.com/CamiloLizarazoB/dashboard-latamV1.git
 
 2. Instalar las dependencias:
 
+```bash
 cd dashboard-latamV1
 
-```bash
 npm install 
 ```
 
@@ -42,6 +42,4 @@ Abre tu navegador web y dirígete a la siguiente URL: http://localhost:3000
 Nota: El archivo .env está versionado para asegurar el funcionamiento de las pruebas y 
 no tener problemas configurando las variables de entorno
 
-Licencia:
-
-Este proyecto está licenciado bajo la licencia MIT.
+Gracias por la oportunidad!
