@@ -45,8 +45,8 @@ export async function createSale(prevState: State, formData: any) {
     return { message: 'Database Error: Failed to Update Slaes.' };
   }
 
-  revalidatePath('/dashboard');
-  redirect('/dashboard');
+  revalidatePath('/dashboard/sales');
+  redirect('/dashboard/sales');
 }
 
 export async function createClient(prevState: State, formData: any) {
