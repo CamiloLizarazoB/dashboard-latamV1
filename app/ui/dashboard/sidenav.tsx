@@ -2,10 +2,15 @@
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
 import AcmeLogo from '@/app/ui/acme-logo';
-import { PowerIcon } from '@heroicons/react/24/outline';
+import {
+  PowerIcon,
+  ArrowLeftCircleIcon,
+  ArrowRightCircleIcon,
+} from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { signOutAction } from '@/app/lib/actions';
 
 const SidebarContainer = styled.div`
   width: ${(props) => (props.expanded ? '200px' : '80px')};
@@ -29,13 +34,28 @@ const Sidebar = ({ expanded, toggleSidebar }) => {
       <div>
         <i className="fas fa-cog fa-2x text-white"></i>
       </div>
-      <button onClick={toggleSidebar}>Toggle Sidebar</button>
+      <div className="hidden h-auto w-full grow rounded-md bg-blue-700 md:block"></div>
+      <div>
+        <div>
+          {expanded ? (
+            <ArrowLeftCircleIcon onClick={toggleSidebar} className="w-full p-20" />
+          ) : (
+            <ArrowRightCircleIcon onClick={toggleSidebar} className="w-6" />
+          )}
+        </div>
+        <form action={signOutAction}>
+          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-blue-700 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3">
+            <PowerIcon className="w-6" />
+            <div className="hidden md:block">Sign Out</div>
+          </button>
+        </form>
+      </div>
     </SidebarContainer>
   );
 };
 
 export default function SideNav() {
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState<boolean>(false);
 
   const toggleSidebar = () => {
     setSidebarExpanded(!sidebarExpanded);

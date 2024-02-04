@@ -295,7 +295,7 @@ async function main() {
   // await seedSellers(client);
   // await seedCutomers(client);
   // await seedProducts(client);
-  await seedBranchOffices(client);
+  // await seedBranchOffices(client);
   // await seedSale(client);
 
   await client.end();

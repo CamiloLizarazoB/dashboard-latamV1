@@ -3,7 +3,7 @@ import { sql } from '@vercel/postgres';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { fetchProductsByIdOffice } from './data';
 
@@ -50,6 +50,29 @@ export async function createSale(prevState: State, formData) {
 
   revalidatePath('/dashboard');
   redirect('/dashboard');
+}
+
+export async function createClient(prevState: State, formData) {
+  const jsonString = JSON.stringify(formData.address);
+  const customer_address = jsonString.substring(1, jsonString.length - 1);
+
+  try {
+    await sql`
+      INSERT INTO customers (customer_rut, customer_name, customer_lastname, customer_phone, customer_address)
+      VALUES (
+        ${formData.customer_rut}, 
+        ${formData.customer_name}, 
+        ${formData.customer_lastname}, 
+        ${formData.customer_phone},
+        ${customer_address})
+    `;
+  } catch (error) {
+    console.log('🚀 ~ createSale ~ error:', error);
+    return { message: 'Database Error: Failed to Update Slaes.' };
+  }
+
+  revalidatePath('/dashboard/sales/create');
+  redirect('/dashboard/sales/create');
 }
 
 export async function updateInvoice(
@@ -120,3 +143,9 @@ export const fetchProducts = async (id: string) => {
   const products = await fetchProductsByIdOffice(id);
   return products;
 };
+
+
+export const signOutAction = async () => {
+  'use server';
+  await signOut();
+}
