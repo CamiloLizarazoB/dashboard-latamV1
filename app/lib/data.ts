@@ -5,6 +5,7 @@ import {
   BranchOffice,
   Product,
   Seller,
+  Sale,
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -173,6 +174,21 @@ import { unstable_noStore as noStore } from 'next/cache';
 //   }
 // }
 
+export async function fetchSales() {
+  try {
+    const data = await sql<Sale>`
+      SELECT *
+      FROM sales
+      ORDER BY sale_date ASC
+    `;
+    const sales = data.rows;
+    return sales;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch all sales.');
+  }
+}
+
 export async function fetchCustomers() {
   try {
     const data = await sql<Customer>`
@@ -208,6 +224,21 @@ export async function fetchBranchOffice() {
       SELECT *
       FROM branchoffices
       ORDER BY branch_office_name ASC
+    `;
+    const branchoffices = data.rows;
+
+    return branchoffices;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all branchoffices.');
+  }
+}
+export async function fetchSaleById(id: string) {
+  try {
+    const data = await sql<Sale>`
+      SELECT *
+      FROM sales
+      WHERE sale_id = ${id}
     `;
     const branchoffices = data.rows;
 
