@@ -3,6 +3,7 @@ import { BranchOffice, Customer, Product, Seller } from '@/app/lib/definitions';
 import { createClient, createSale, fetchProducts } from '@/app/lib/actions';
 import { ChangeEvent, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { openSansExtraBold } from '../fonts';
 
 export default function Form({
   customers,
@@ -47,9 +48,17 @@ export default function Form({
     <form onSubmit={handleSubmit(formSubmit)}>
       <div className="flex">
         <div className="flex-1 p-8">
-          <h2 className="mb-2 text-4xl font-bold text-blue-800">New Client</h2>
+          <h2
+            className={`${openSansExtraBold.className} mb-2 text-4xl font-bold text-black`}
+          >
+            New Client
+          </h2>
+          <hr className="horizontal-line" />
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-600">Client</h3>
+            <h3 className="subtitle text-lg font-semibold text-gray-600">
+              Client
+            </h3>
+            <hr />
             <div className="mt-4 flex space-x-4">
               <div className="block w-full">
                 <label
@@ -135,7 +144,10 @@ export default function Form({
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-600">Address</h3>
+            <h3 className="subtitle text-lg font-semibold text-gray-600 mb-2">
+              Address
+            </h3>
+            <hr />
             {fields.map((field, index) => (
               <div key={index} className="mt-4 flex space-x-4">
                 <div className="block w-full">

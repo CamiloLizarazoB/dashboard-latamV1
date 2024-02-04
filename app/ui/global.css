@@ -16,3 +16,32 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+input, select {
+  border: none;
+}
+
+body { 
+  background-color: #f6f7fb;
+}
+hr {
+  border-color: #bdc4d0;
+}
+
+hr.horizontal-line {
+  border-width: 2px;
+}
+
+.subtitle {
+    color: black;
+    font-size: 25px;
+    margin-top: 60px;
+}
+
+.background{
+  background-size: 80%;
+}
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,21 +1,28 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import Link from 'next/link';
+import { openSansBold, openSansExtraBold } from './ui/fonts';
 
 export default function Page() {
   return (
     <>
-      <header className="bg-blue-200 p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <h1 className="text-4xl font-bold">Lorem ipsum Design</h1>
+      <main className="bg-white">
+        <div className="background mb-16 bg-[url('../background-banner.png')] bg-right bg-no-repeat">
           <nav>
-            <ul className="flex space-x-4">
+            <ul className="flex justify-end space-x-4 p-20">
               <li>
-                <a href="#" className="text-blue-600 hover:text-blue-800">
+                <a
+                  href="#section1"
+                  className="text-blue-600 hover:text-blue-800"
+                >
                   Content 1
                 </a>
               </li>
               <li>
-                <a href="#" className="text-blue-600 hover:text-blue-800">
+                <a
+                  href="#section2"
+                  className="text-blue-600 hover:text-blue-800"
+                >
                   Content 2
                 </a>
               </li>
@@ -23,65 +30,121 @@ export default function Page() {
                 {' '}
                 <Link
                   href="/login"
-                  className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+                  className="text-blue-600 hover:text-blue-800"
                 >
-                  <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
+                  <span>Log in</span>
                 </Link>
               </li>
             </ul>
           </nav>
+          <div className="p-10 pb-[250px] pl-56 pt-[86px]">
+            <h1
+              className={`${openSansExtraBold.className} mb-6 w-1/3 text-6xl`}
+            >
+              Lorem ipsum Design
+            </h1>
+            <p className="mb-4 w-[390px] text-[#99a4b7]">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua
+            </p>
+            <button
+              className={`${openSansBold.className} mt-20 rounded bg-blue-600 px-4 py-2 text-white`}
+            >
+              LOGIN
+            </button>
+          </div>
         </div>
-      </header>
-      <main className="container mx-auto p-8">
-        <section className="mb-16">
-          <p className="mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua
-          </p>
-          <button className="rounded bg-blue-600 px-4 py-2 text-white">
-            LOGIN
-          </button>
-        </section>
 
-        <section className="mb-16">
-          <h2 className="mb-6 text-3xl font-bold">Content 1</h2>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="rounded bg-blue-500 p-4 text-white">
-              <p>
+        <div className="mb-16" id="section1">
+          <div className="p-10 pb-[20px] pl-56 pt-[86px]">
+            <h1
+              className={`${openSansExtraBold.className} mb-6 w-1/3 text-6xl`}
+            >
+              Content 1
+            </h1>
+            <p className="mb-4 w-[390px] text-[#99a4b7]">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua
+            </p>
+          </div>
+          <div className="ml-[12%] mr-[12%]">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="col-span-1 rounded-md bg-white p-4">
+                <Image
+                  src="/img-mock.png"
+                  width={280}
+                  height={760}
+                  className="hidden md:inline"
+                  alt="Screenshots of the dashboard project showing desktop version"
+                />
+                <p className="mt-[20px] text-left text-[#99a4b7]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua{' '}
+                </p>
+              </div>
+
+              <div className="col-span-1 rounded-md bg-white p-4">
+                <Image
+                  src="/img-mock.png"
+                  width={280}
+                  height={760}
+                  className="hidden md:inline"
+                  alt="Screenshots of the dashboard project showing desktop version"
+                />
+                <p className="mt-[20px] text-left text-[#99a4b7]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua{' '}
+                </p>
+              </div>
+
+              <div className="col-span-1 rounded-md bg-white p-4">
+                <Image
+                  src="/img-mock.png"
+                  width={280}
+                  height={760}
+                  className="hidden md:inline"
+                  alt="Screenshots of the dashboard project showing desktop version"
+                />
+                <p className="mt-[20px] text-left text-[#99a4b7]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua{' '}
+                </p>
+              </div>
+
+              <div className="col-span-1 rounded-md bg-white p-4">
+                <Image
+                  src="/img-mock.png"
+                  width={280}
+                  height={760}
+                  className="hidden md:inline"
+                  alt="Screenshots of the dashboard project showing desktop version"
+                />
+                <p className="mt-[20px] text-left text-[#99a4b7]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua{' '}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="section2" className={`bg-[url('../background-banner2.png')]`}>
+          <div className="p-10 pb-[250px] pr-56 pt-[86px]">
+            <div className="float-right text-end">
+              <h1
+                className={`${openSansExtraBold.className} mb-6 w-full text-6xl`}
+              >
+                Content 2
+              </h1>
+              <p className="mb-4 w-[390px] text-[#99a4b7]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua
               </p>
             </div>
           </div>
-        </section>
-
-        <section>
-          <h2 className="mb-6 text-3xl font-bold">Content 2</h2>
-          <div className="flex justify-between">
-            <div className="w-1/3 rounded bg-gray-100 p-4">
-              <p className="leading-tight">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-            <div className="w-1/3 rounded bg-blue-500 p-4">
-              <p className="leading-tight text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-            <div className="w-1/3 rounded bg-gray-100 p-4">
-              <p className="leading-tight">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-          </div>
-        </section>
+        </div>
       </main>
-      <footer className="mt-16 bg-blue-200 p-6">
-        <p className="text-center">Footer content here</p>
-      </footer>
+      <footer className="bg-[#4c98f7] p-6"></footer>
     </>
   );
 }
