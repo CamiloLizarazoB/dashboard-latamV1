@@ -11,6 +11,7 @@ import { Button } from '@/app/ui/button';
 import { createSale, fetchProducts } from '@/app/lib/actions';
 import { ChangeEvent, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { openSansSemiBold } from '../fonts';
 
 export default function Form({
   customers,
@@ -70,6 +71,9 @@ export default function Form({
   };
 
   const handleOfficeChange = (event: any) => {
+    setValue(`office`, event.target.value, {
+      shouldValidate: true,
+    });
     const selectedOfficeId = event.target.value;
     setSelectedOffice(selectedOfficeId);
     const selectedBranchOffice = branchOffice.find(
@@ -77,7 +81,7 @@ export default function Form({
     );
     setValue(
       'currency',
-      selectedBranchOffice ? selectedBranchOffice.branch_office_currency : '',
+      selectedBranchOffice ? selectedBranchOffice.branch_office_currency : '', { shouldValidate: true}
     );
     handleSetProducts(selectedOfficeId);
   };
@@ -100,18 +104,21 @@ export default function Form({
     remove(index);
   };
 
-  const handleChangeQuantity = (index: number, field: any) => {
+  const handleChangeQuantity = (index: number, event: any) => {
+    setValue(`products.${index}.quantity`, event.target.value, {
+      shouldValidate: true,
+    });
     const products = formData.products;
     const productSubTotal =
-      Number(products?.[index].price) * Number(field.target.value);
+      Number(products?.[index].price) * Number(event.target.value);
     setValue(`products.${index}.subTotal`, String(productSubTotal));
     handleChangeSubtotal();
   };
 
-  const handleChangePrice = (index: number, field: any) => {
+  const handleChangePrice = (index: number, event: any) => {
     const products = formData.products;
     const productSubTotal =
-      Number(field.target.value) * Number(products?.[index].quantity);
+      Number(event.target.value) * Number(products?.[index].quantity);
     setValue(`products.${index}.subTotal`, String(productSubTotal));
     handleChangeSubtotal();
   };
@@ -126,10 +133,13 @@ export default function Form({
   };
 
   const handleChangeProduct = (
-    value: ChangeEvent<HTMLSelectElement>,
+    event: ChangeEvent<HTMLSelectElement>,
     index: number,
   ) => {
-    const productId = value.target.value;
+    setValue(`products.${index}.productId`, event.target.value, {
+      shouldValidate: true,
+    });
+    const productId = event.target.value;
     const filterProduct = products.find(
       (product) => product.product_id === productId,
     );
@@ -138,66 +148,133 @@ export default function Form({
   };
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)}>
+    <form
+      onSubmit={handleSubmit(formSubmit)}
+      className={`${openSansSemiBold.className}`}
+    >
       <div className="flex">
         <div className="flex-1 p-8">
           <h2 className="mb-2 text-4xl font-bold text-blue-800">New Sale</h2>
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-600">Document</h3>
-            <div className="mt-4 flex space-x-4">
-              <select
-                className="w-full border p-2"
-                {...register('customer', { required: true })}
-              >
-                <option value="" disabled></option>
-                {customers.map((customer) => (
-                  <option
-                    key={customer.customer_id}
-                    value={customer.customer_id}
+            <div className="mt-4 flex space-x-4 text-lg">
+              <div className="block w-full">
+                <label
+                  className="mb-3 mt-5 block font-medium text-gray-900"
+                  style={{ color: '#99a4b7' }}
+                  htmlFor="email"
+                >
+                  Client
+                </label>
+                <div className="flex">
+                  <select
+                    className="mr-5 w-full border p-2"
+                    {...register('customer', {
+                      required: 'Customer is required',
+                    })}
                   >
-                    {customer.customer_name}
-                  </option>
-                ))}
-              </select>{' '}
-              <button className="bg-blue-500 px-4 py-2 text-white">
-                <Link href="/dashboard/customers/create">
-                  <i className="fas fa-plus"></i>
-                </Link>
-              </button>
-              <select
-                {...register('office', { required: true })}
-                className="w-full border p-2"
-                aria-describedby="office-error"
-                onChange={handleOfficeChange}
-              >
-                <option value="" disabled></option>
-                {branchOffice.map((office) => (
-                  <option
-                    key={office.branch_office_id}
-                    value={office.branch_office_id}
-                  >
-                    {office.branch_office_name}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                className="w-full border p-2"
-                {...register('currency', { required: true })}
-                readOnly
-              />
-              <select
-                {...register('seller', { required: true })}
-                className="w-full border p-2"
-                aria-describedby="seller-error"
-              >
-                <option value="" disabled></option>
-                {sellers.map((seller) => (
-                  <option key={seller.seller_id} value={seller.seller_id}>
-                    {seller.seller_name}
-                  </option>
-                ))}
-              </select>
+                    <option value="" disabled></option>
+                    {customers.map((customer) => (
+                      <option
+                        key={customer.customer_id}
+                        value={customer.customer_id}
+                      >
+                        {customer.customer_name}
+                      </option>
+                    ))}
+                  </select>
+                  <button className="bg-blue-500 px-4 py-2 text-white">
+                    <Link href="/dashboard/customers/create">
+                      <i className="fas fa-plus"></i>
+                    </Link>
+                  </button>
+                </div>
+                {errors.customer && (
+                  <p className="text-sm text-red-500">
+                    {errors.customer.message}
+                  </p>
+                )}
+              </div>
+              <div className="block w-full">
+                <label
+                  className="mb-3 mt-5 block font-medium text-gray-900"
+                  style={{ color: '#99a4b7' }}
+                  htmlFor="office"
+                >
+                  Branch office
+                </label>
+                <select
+                  {...register('office', {
+                    required: 'Branch office is required',
+                  })}
+                  className="w-full border p-2"
+                  aria-describedby="office-error"
+                  onChange={handleOfficeChange}
+                >
+                  <option value="" disabled></option>
+                  {branchOffice.map((office) => (
+                    <option
+                      key={office.branch_office_id}
+                      value={office.branch_office_id}
+                    >
+                      {office.branch_office_name}
+                    </option>
+                  ))}
+                </select>
+                {errors.office && (
+                  <p className="text-sm text-red-500">
+                    {errors.office.message}
+                  </p>
+                )}
+              </div>
+              <div className="block w-full">
+                <label
+                  className="mb-3 mt-5 block font-medium text-gray-900"
+                  style={{ color: '#99a4b7' }}
+                  htmlFor="currency"
+                >
+                  Currency
+                </label>
+                <input
+                  type="text"
+                  className="w-full border p-2"
+                  {...register('currency', {
+                    required: 'Currency is required',
+                  })}
+                  readOnly
+                />
+                {errors.currency && (
+                  <p className="text-sm text-red-500">
+                    {errors.currency.message}
+                  </p>
+                )}
+              </div>
+              <div className="block w-full">
+                <label
+                  className="mb-3 mt-5 block font-medium text-gray-900"
+                  style={{ color: '#99a4b7' }}
+                  htmlFor="seller"
+                >
+                  Seller
+                </label>
+                <select
+                  {...register('seller', { required: 'Seller is required' })}
+                  className="w-full border p-2"
+                  aria-describedby="seller-error"
+                >
+                  <option value="" disabled></option>
+                  {sellers.map((seller) => (
+                    <option key={seller.seller_id} value={seller.seller_id}>
+                      {seller.seller_name}
+                    </option>
+                  ))}
+                </select>
+                {errors.seller && (
+                  <p className="text-sm text-red-500">
+                    {errors.seller.message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -205,46 +282,103 @@ export default function Form({
             <h3 className="text-lg font-semibold text-gray-600">Details</h3>
             {fields.map((field, index) => (
               <div key={index} className="mt-4 flex space-x-4">
-                <select
-                  {...register(`products.${index}.productId`, {
-                    required: true,
-                  })}
-                  className="w-1/2 border p-2"
-                  aria-describedby="office-error"
-                  onChange={({ ...field }) => handleChangeProduct(field, index)}
-                >
-                  <option value="" disabled></option>
-                  {products.map((product) => (
-                    <option key={product.product_id} value={product.product_id}>
-                      {product.product_name}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  className="w-1/4 border p-2"
-                  {...register(`products.${index}.quantity`)}
-                  onChange={({ ...field }) =>
-                    handleChangeQuantity(index, field)
-                  }
-                />
-                <input
-                  type="text"
-                  className="w-1/4 border p-2"
-                  {...register(`products.${index}.price`)}
-                  onChange={({ ...field }) => handleChangePrice(index, field)}
-                />
-                <input
-                  type="text"
-                  className="w-1/4 border p-2"
-                  {...register(`products.${index}.subTotal`)}
-                />
-                <button
-                  onClick={() => handleRemoveInput(index)}
-                  className="bg-blue-500 px-4 py-2 text-white"
-                >
-                  <i className="fas fa-times"></i>
-                </button>
+                <div className="block w-full">
+                  <label
+                    className="mb-3 mt-5 block font-medium text-gray-900"
+                    style={{ color: '#99a4b7' }}
+                    htmlFor="office"
+                  >
+                    Name
+                  </label>
+                  <select
+                    {...register(`products.${index}.productId`, {
+                      required: 'Name is required',
+                    })}
+                    className="w-full border p-2"
+                    aria-describedby="office-error"
+                    onChange={({ ...field }) =>
+                      handleChangeProduct(field, index)
+                    }
+                  >
+                    <option value="" disabled></option>
+                    {products.map((product) => (
+                      <option
+                        key={product.product_id}
+                        value={product.product_id}
+                      >
+                        {product.product_name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.products?.[index]?.productId && (
+                    <p className="text-sm text-red-500">
+                      {errors.products?.[index]?.productId?.message}
+                    </p>
+                  )}
+                </div>
+                <div className="block w-full">
+                  <label
+                    className="mb-3 mt-5 block font-medium text-gray-900"
+                    style={{ color: '#99a4b7' }}
+                    htmlFor="quantity"
+                  >
+                    Quantity
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border p-2"
+                    {...register(`products.${index}.quantity`, {
+                      required: 'Quantity is required',
+                    })}
+                    onChange={({ ...field }) =>
+                      handleChangeQuantity(index, field)
+                    }
+                  />
+                  {errors?.products?.[0]?.quantity && (
+                    <p className="text-sm text-red-500">
+                      {errors?.products?.[0]?.quantity.message}
+                    </p>
+                  )}
+                </div>
+                <div className="block w-full">
+                  <label
+                    className="mb-3 mt-5 block font-medium text-gray-900"
+                    style={{ color: '#99a4b7' }}
+                    htmlFor="price"
+                  >
+                    Price
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border p-2"
+                    {...register(`products.${index}.price`)}
+                    onChange={({ ...field }) => handleChangePrice(index, field)}
+                    readOnly
+                  />
+                </div>
+                <div className="block w-full">
+                  <label
+                    className="mb-3 mt-5 block font-medium text-gray-900"
+                    style={{ color: '#99a4b7' }}
+                    htmlFor="subTotal"
+                  >
+                    Sub total
+                  </label>
+                  <div className="flex">
+                    <input
+                      type="text"
+                      className="w-full border p-2"
+                      {...register(`products.${index}.subTotal`)}
+                      readOnly
+                    />
+                    <button
+                      onClick={() => handleRemoveInput(index)}
+                      className="ml-5 bg-blue-500 px-4 py-2 text-white"
+                    >
+                      <i className="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
             <button
@@ -257,12 +391,21 @@ export default function Form({
 
           <div className="mt-8">
             <div className="flex justify-end">
-              <input
-                type="number"
-                className="w-1/4 border p-2"
-                {...register(`total`)}
-                readOnly
-              />
+              <div className="block">
+                <label
+                  className="mb-3 mt-5 block font-medium text-gray-900"
+                  style={{ color: '#99a4b7' }}
+                  htmlFor="total"
+                >
+                  Total
+                </label>
+                <input
+                  type="number"
+                  className="w-full border p-2"
+                  {...register(`total`)}
+                  readOnly
+                />
+              </div>
             </div>
             <button className="float-right mt-4 bg-blue-500 px-6 py-2 text-white">
               Save

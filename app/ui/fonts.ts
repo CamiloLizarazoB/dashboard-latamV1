@@ -11,3 +11,12 @@ export const openSansBold = localFont({
   src: '../../public/fonts/OpenSans-Bold.ttf',
   display: 'swap',
 });
+
+export const openSansExtraBold = localFont({
+  src: '../../public/fonts/OpenSans-ExtraBold.ttf',
+  display: 'swap',
+});
+export const openSansSemiBold = localFont({
+  src: '../../public/fonts/OpenSans-Semibold.ttf',
+  display: 'swap',
+});
