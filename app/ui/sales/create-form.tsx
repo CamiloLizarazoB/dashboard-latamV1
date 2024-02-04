@@ -1,17 +1,10 @@
 'use client';
 import { BranchOffice, Customer, Product, Seller } from '@/app/lib/definitions';
 import Link from 'next/link';
-import {
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline';
-import { Button } from '@/app/ui/button';
 import { createSale, fetchProducts } from '@/app/lib/actions';
 import { ChangeEvent, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { openSansBold, openSansExtraBold, openSansSemiBold } from '../fonts';
+import { openSansExtraBold, openSansSemiBold } from '../fonts';
 
 export default function Form({
   customers,
@@ -24,12 +17,6 @@ export default function Form({
 }) {
   const initialState = { message: null, errors: {} };
 
-  const [selectedOffice, setSelectedOffice] = useState('');
-  const [currency, setCurrency] = useState('');
-  const [inputList, setInputList] = useState(['']); // Estado que almacena la lista de inputs
-  const [total, setTotal] = useState('10000');
-  const [subTotal, setSubTotal] = useState(['']);
-
   const [products, setProducts] = useState<Product[]>([]);
 
   const {
@@ -38,7 +25,6 @@ export default function Form({
     watch,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -58,12 +44,10 @@ export default function Form({
     },
   });
 
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control, // control props comes from useForm (optional: if you are using FormContext)
-      name: 'products', // unique name for your Field Array
-    },
-  );
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'products',
+  });
 
   const formData = watch();
   const formSubmit = (data: any) => {
@@ -75,7 +59,6 @@ export default function Form({
       shouldValidate: true,
     });
     const selectedOfficeId = event.target.value;
-    setSelectedOffice(selectedOfficeId);
     const selectedBranchOffice = branchOffice.find(
       (office) => office.branch_office_id === selectedOfficeId,
     );
@@ -402,7 +385,7 @@ export default function Form({
           </div>
 
           <div className="mt-8">
-            <div className="flex justify-end mb-5">
+            <div className="mb-5 flex justify-end">
               <div className="block">
                 <label
                   className="mb-3 mt-5 block font-medium text-gray-900"

@@ -1,6 +1,5 @@
 
 import Form from '@/app/ui/customers/create-form';
-import Breadcrumbs from '@/app/ui/sales/breadcrumbs';
 import { fetchBranchOffice, fetchCustomers, fetchSellers } from '@/app/lib/data';
 
 export default async function Page() {
@@ -10,16 +9,6 @@ export default async function Page() {
 
   return (
     <main>
-      {/* <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Sales', href: '/dashboard/sales' },
-          {
-            label: 'Create Invoice',
-            href: '/dashboard/sales/create',
-            active: true,
-          },
-        ]}
-      /> */}
       <Form customers={customers} branchOffice={branchOffice} sellers={sellers}/>
     </main>
   );

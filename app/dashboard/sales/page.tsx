@@ -1,5 +1,3 @@
-import Pagination from '@/app/ui/sales/pagination';
-import Search from '@/app/ui/search';
 import Table from '@/app/ui/sales/table';
 import { CreateSale } from '@/app/ui/sales/buttons';
 import { lusitana, openSansExtraBold } from '@/app/ui/fonts';
@@ -34,15 +32,12 @@ export default async function Page({
         </h2>
         <hr className="horizontal-line" />
       </div>
-      <div className="mt-4 flex justify-end items-center gap-2 md:mt-8">
+      <div className="mt-4 flex items-center justify-end gap-2 md:mt-8">
         <CreateSale />
       </div>
       <Suspense key={query + currentPage} fallback={<SalesTableSkeleton />}>
         <Table />
       </Suspense>
-      <div className="mt-5 flex w-full justify-center">
-        {/* <Pagination totalPages={totalPages} /> */}
-      </div>
     </div>
   );
 }
