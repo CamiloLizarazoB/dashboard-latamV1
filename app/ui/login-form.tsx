@@ -1,14 +1,16 @@
 'use client';
-import { lusitana } from '@/app/ui/fonts';
+import { lusitana, openSansSemiBold } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
+  ArrowLeftIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -17,7 +19,7 @@ export default function LoginForm() {
     <>
       <form action={dispatch} className="space-y-3">
         <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-          <h1 className={`${lusitana.className} mb-3 text-2xl`}>
+          <h1 className={`${openSansSemiBold.className} mb-3 text-2xl`}>
             Please log in to continue.
           </h1>
           <div className="w-full">
@@ -78,9 +80,6 @@ export default function LoginForm() {
           </div>
         </div>
       </form>
-      <Button className="mt-4 w-full">
-        Cancel <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-      </Button>
     </>
   );
 }
@@ -88,10 +87,16 @@ export default function LoginForm() {
 function LoginButton() {
   const { pending } = useFormStatus();
   return (
-    <>
+    <div className="flex gap-5">
+      <Link href="/" className="flex w-full">
+        <Button className="mt-4 w-full">
+          <p>Cancel</p>
+          <ArrowLeftIcon className="ml-auto h-5 w-5 text-gray-50" />
+        </Button>
+      </Link>
       <Button className="mt-4 w-full" aria-disabled={pending}>
         Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
       </Button>
-    </>
+    </div>
   );
 }
