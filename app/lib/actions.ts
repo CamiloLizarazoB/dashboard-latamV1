@@ -33,7 +33,7 @@ export type State = {
   message?: string | null;
 };
 
-export async function createSale(prevState: State, formData) {
+export async function createSale(prevState: State, formData: any) {
   const dateSale = new Date().toLocaleDateString();
   const jsonString = JSON.stringify(formData.products);
   const sale_details = jsonString.substring(1, jsonString.length - 1);
