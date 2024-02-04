@@ -1,17 +1,10 @@
 import Form from '@/app/ui/sales/edit-form';
 import Breadcrumbs from '@/app/ui/sales/breadcrumbs';
-import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
+import { fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const [invoice, customers] = await Promise.all([
-    fetchInvoiceById(id),
-    fetchCustomers(),
-  ]);
-  if (!invoice) {
-    notFound();
-  }
   return (
     <main>
       {/* <Breadcrumbs
@@ -24,7 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           },
         ]}
       /> */}
-      <Form invoice={invoice} customers={customers} />
+      {/* <Form invoice={invoice} customers={customers} /> */}
     </main>
   );
 }
