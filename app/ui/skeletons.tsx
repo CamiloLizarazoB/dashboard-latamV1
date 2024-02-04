@@ -55,13 +55,13 @@ export function SalesTableSkeleton() {
                   Sale birtday
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Seller id
+                  Seller
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Customer id
+                  Customer
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Branch office id
+                  Branch office
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Total

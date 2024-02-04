@@ -101,6 +101,20 @@ export async function fetchProductsByIdOffice(office_id: string) {
     throw new Error('Failed to fetch all products.');
   }
 }
+export async function fetchAllProducts() {
+  try {
+      const data = await sql<Product>`
+      SELECT *
+      FROM products
+      ORDER BY Product_name ASC
+    `;
+      const products = data.rows;
+      return products;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all products.');
+  }
+}
 
 export async function getUser(email: string) {
   try {

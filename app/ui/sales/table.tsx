@@ -1,8 +1,16 @@
 import { SaleDetails } from '@/app/ui/sales/buttons';
-import { fetchSales } from '@/app/lib/data';
+import {
+  fetchBranchOffice,
+  fetchCustomers,
+  fetchSales,
+  fetchSellers,
+} from '@/app/lib/data';
 
 export default async function SalesTable() {
   const fetchSalesTable = await fetchSales();
+  const sellers = await fetchSellers();
+  const customers = await fetchCustomers();
+  const offices = await fetchBranchOffice();
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -17,13 +25,13 @@ export default async function SalesTable() {
                   Sale birtday
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Seller id
+                  Seller
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Customer id
+                  Customer
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Branch office id
+                  Branch office
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Total
@@ -46,13 +54,25 @@ export default async function SalesTable() {
                     {sale.sale_date.toLocaleDateString()}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {sale.seller_id}
+                    {
+                      sellers.find(
+                        (seller) => seller.seller_id === sale.seller_id,
+                      )?.seller_name
+                    }
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {sale.customer_id}
+                    {
+                      customers.find(
+                        (customer) => customer.customer_id === sale.customer_id,
+                      )?.customer_name
+                    }
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {sale.branch_office_id}
+                    {
+                      offices.find(
+                        (office) => office.branch_office_id === sale.branch_office_id,
+                      )?.branch_office_name
+                    }
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {sale.total_sale_amount}

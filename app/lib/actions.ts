@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
-import { fetchProductsByIdOffice, fetchSaleById } from './data';
+import { fetchAllProducts, fetchProductsByIdOffice, fetchSaleById } from './data';
 
 export type State = {
   errors?: {
@@ -84,6 +84,11 @@ export const SaleById = async (id: string) => {
 
 export const fetchProducts = async (id: string) => {
   const products = await fetchProductsByIdOffice(id);
+  return products;
+};
+
+export const allProducts = async () => {
+  const products = await fetchAllProducts();
   return products;
 };
 
